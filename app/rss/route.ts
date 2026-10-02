@@ -1,10 +1,10 @@
 import { baseUrl } from 'app/sitemap'
-import { getBlogPosts } from 'app/research/utils'
+import { getResearchPosts } from 'app/research/utils'
 
 export async function GET() {
-  let allBlogs = await getBlogPosts()
+  let allResearchPosts = await getResearchPosts()
 
-  const itemsXml = allBlogs
+  const itemsXml = allResearchPosts
     .sort((a, b) => {
       if (new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)) {
         return -1

@@ -1,12 +1,12 @@
 import Link from 'next/link'
-import { formatDate, getBlogPosts } from 'app/research/utils'
+import { formatDate, getResearchPosts } from 'app/research/utils'
 
-export function BlogPosts() {
-  let allBlogs = getBlogPosts()
+export function ResearchPosts() {
+  let allResearchPosts = getResearchPosts()
 
   return (
     <div>
-      {allBlogs
+      {allResearchPosts
         .sort((a, b) => {
           if (
             new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)

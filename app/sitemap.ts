@@ -1,9 +1,9 @@
-import { getBlogPosts } from 'app/research/utils'
+import { getResearchPosts } from 'app/research/utils'
 
 export const baseUrl = 'https://ahnricky.dev'
 
 export default async function sitemap() {
-  let blogs = getBlogPosts().map((post) => ({
+  let researchPosts = getResearchPosts().map((post) => ({
     url: `${baseUrl}/research/${post.slug}`,
     lastModified: post.metadata.publishedAt,
   }))
@@ -13,5 +13,5 @@ export default async function sitemap() {
     lastModified: new Date().toISOString().split('T')[0],
   }))
 
-  return [...routes, ...blogs]
+  return [...routes, ...researchPosts]
 }

@@ -1,10 +1,10 @@
 import { notFound } from 'next/navigation'
 import { CustomMDX } from 'app/components/mdx'
-import { formatDate, getBlogPosts } from 'app/research/utils'
+import { formatDate, getResearchPosts } from 'app/research/utils'
 import { baseUrl } from 'app/sitemap'
 
 export async function generateStaticParams() {
-  let posts = getBlogPosts()
+  let posts = getResearchPosts()
 
   return posts.map((post) => ({
     slug: post.slug,
@@ -13,7 +13,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
   const { slug } = await params
-  let post = getBlogPosts().find((post) => post.slug === slug)
+  let post = getResearchPosts().find((post) => post.slug === slug)
   if (!post) {
     return
   }
@@ -52,9 +52,9 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default async function Blog({ params }) {
+export default async function Research({ params }) {
   const { slug } = await params
-  let post = getBlogPosts().find((post) => post.slug === slug)
+  let post = getResearchPosts().find((post) => post.slug === slug)
 
   if (!post) {
     notFound()
@@ -68,7 +68,7 @@ export default async function Blog({ params }) {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
-            '@type': 'BlogPosting',
+            '@type': 'Article',
             headline: post.metadata.title,
             datePublished: post.metadata.publishedAt,
             dateModified: post.metadata.publishedAt,
